@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A web-based implementation of a transit delay analysis methodology applied to the City of Edmonton",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
