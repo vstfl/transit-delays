@@ -5,12 +5,115 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.container-bg {
+    background-color: #ffffff49;
+    border: 1.5px rgba(136, 136, 136, 0.26) solid;
+    box-shadow: 0px 0px 20px rgba(221, 221, 221, 0.596);
+    backdrop-filter: blur(12px) saturate(80%) contrast(50%) brightness(130%);
+    border-radius: 0.5rem;
+    color: rgb(51, 51, 51);
+}
+
 #header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    position: relative;
+    margin: 0.7rem;
+    height: 5vh;
+    min-height: 2rem;
+    z-index: 2;
 }
 
 #header .right-side {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0px 0.5em;
+}
+
+#header .right-side .nav-text:hover {
+    font-weight: bolder;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.363);
+    height: 100%;
+}
+
+#header .right-side .nav-text {
+    display: flex;
+    width: 20vw;
+    min-width: 2em;
+    max-width: 6em;
+    margin: 0 0.5em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+a.nav,
+div.nav {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+#map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.map-styles {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0.25rem;
+    width: 8vw;
+    max-width: 250px;
+    min-width: 200px;
+    font-size: 0.7em;
+    z-index: 2;
+    right: 50px;
+    bottom: 30px;
+    gap: 1em;
+}
+
+.map-styles .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.map-styles .radio input {
+    display: none;
+}
+
+.map-styles .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.3rem;
+    border: none;
+    padding: 0.3rem 0;
+    transition: all 0.15s ease-in-out;
+}
+
+.map-styles .radio input:checked + .name {
+    background-color: #ffffff;
+    font-weight: 600;
+}
+
+.map-styles .radio:hover {
+    color: black;
+    font-weight: bolder;
 }

@@ -1,2 +1,2 @@
-import './swag.js';
-import './styles.css';
+import "./mapInteractions.js";
+import "./styles.css";

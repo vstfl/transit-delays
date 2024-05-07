@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Transit Delays in CoE</title>
+        <link rel="icon" href="./assets/engg.png" />
 
         <!-- Mapbox Stylesheets -->
         <link
@@ -15,22 +16,12 @@
     <body>
         <div class="ui-container loadup">
             <div id="header">
-                <div class="left-side">
-                    <a href="./index.html" class="logo">
-                        <img
-                            class="header-logo"
-                            src="./assets/lorwis.png"
-                            style="
-                                height: 100%;
-                                width: auto;
-                                align-items: center;
-                            "
-                        />
-                    </a>
-                </div>
+                <div class="left-side"></div>
 
-                <div class="right-side">
-                    <a class="nav nav-text" href="#" id="center-iowa">Home</a>
+                <div class="right-side container-bg">
+                    <a class="nav nav-text" href="#" id="center-edmonton"
+                        >Home</a
+                    >
                     <a
                         class="nav nav-text"
                         href="https://sites.google.com/ualberta.ca/drtaejkwon/home?authuser=0"
@@ -45,6 +36,37 @@
                     />
                 </div>
             </div>
+
+            <section class="console-container" id="console">
+                <div id="console-title"></div>
+                <div id="console-controls"></div>
+                <div id="console-information"></div>
+                <div id="console-legend"></div>
+            </section>
+        </div>
+
+        <section class="map-container loadup">
+            <div id="map"></div>
+        </section>
+
+        <div class="map-styles loadup container-bg">
+            <label class="radio">
+                <input
+                    type="radio"
+                    name="radio"
+                    value="clvj8ldr8014x01q1f0et6pay"
+                />
+                <span class="name">Satellite</span>
+            </label>
+            <label class="radio">
+                <input
+                    type="radio"
+                    name="radio"
+                    value="clvwx8k2p014201rddm6k3eb0"
+                    checked=""
+                />
+                <span class="name">Light</span>
+            </label>
         </div>
     </body>
 </html>
