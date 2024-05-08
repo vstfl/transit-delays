@@ -24,12 +24,15 @@
             <div id="header">
                 <div class="left-side"></div>
 
-                <div class="right-side container-bg">
-                    <a class="nav nav-text" href="#" id="center-edmonton"
+                <div class="right-side container-bg style-invert">
+                    <a
+                        class="nav nav-text text-invert"
+                        href="#"
+                        id="center-edmonton"
                         >Home</a
                     >
                     <a
-                        class="nav nav-text"
+                        class="nav nav-text text-invert"
                         href="https://sites.google.com/ualberta.ca/drtaejkwon/home?authuser=0"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -43,10 +46,13 @@
                 </div>
             </div>
 
-            <section class="console-container container-bg" id="console">
+            <section
+                class="console-container container-bg style-invert"
+                id="console"
+            >
                 <div id="console-title">
                     <h2 id="map-title">Placeholder text</h2>
-                    <p id="map-subtitle">
+                    <p id="map-subtitle" class="text-invert">
                         In the City of Edmonton from March 4th to 8th
                     </p>
                 </div>
@@ -56,25 +62,45 @@
                         class="metric-control interactive-form"
                         id="metric-control"
                     >
-                        Metric:
-                        <span id="metric1" class="interactive-text">Delay</span>
-                        or
-                        <span id="metric2" class="interactive-text"
-                            >People-Delay</span
+                        <span
+                            class="control-label"
+                            style="
+                                text-decoration: underline;
+                                letter-spacing: 0.01ch;
+                            "
+                            >Metric:</span
                         >
+                        <div class="control-options">
+                            <span id="metric1" class="interactive-text"
+                                >Delay&nbsp</span
+                            >
+                            <span>or&nbsp</span>
+                            <span id="metric2" class="interactive-text"
+                                >People-Delay</span
+                            >
+                        </div>
                     </div>
                     <div
                         class="aggregation-control interactive-form"
                         id="aggregation-control"
                     >
-                        Aggregation:
-                        <span id="aggregation1" class="interactive-text"
-                            >Stop</span
+                        <span
+                            class="control-label"
+                            style="
+                                text-decoration: underline;
+                                letter-spacing: 0.01ch;
+                            "
+                            >Aggregation:</span
                         >
-                        or
-                        <span id="aggregation2" class="interactive-text"
-                            >Neighborhood</span
-                        >
+                        <div class="control-options">
+                            <span id="aggregation1" class="interactive-text"
+                                >Stop&nbsp</span
+                            >
+                            <span>or&nbsp</span>
+                            <span id="aggregation2" class="interactive-text"
+                                >Neighborhood</span
+                            >
+                        </div>
                     </div>
                 </div>
                 <hr />
@@ -97,14 +123,14 @@
             <div id="map"></div>
         </section>
 
-        <div class="map-styles loadup container-bg">
+        <div class="map-styles loadup container-bg style-invert">
             <label class="radio">
                 <input
                     type="radio"
                     name="radio"
-                    value="clvj8ldr8014x01q1f0et6pay"
+                    value="clve9aeu900c501rd7qcn14q6"
                 />
-                <span class="name">Satellite</span>
+                <span class="name">Dark</span>
             </label>
             <label class="radio">
                 <input

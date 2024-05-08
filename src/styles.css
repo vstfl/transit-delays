@@ -33,10 +33,14 @@ body {
     padding: 0px;
 }
 
+#header .right-side:hover {
+    filter: brightness(1.2); /* Increase brightness of the background */
+}
+
 #header .right-side .nav-text:hover {
     font-weight: bolder;
     color: black;
-    background-color: rgba(255, 255, 255, 0.856);
+    /* background-color: rgba(255, 255, 255, 0.856); */
     height: 100%;
     border-radius: 0.7rem;
 }
@@ -110,7 +114,7 @@ div.nav {
 }
 
 .map-styles .radio input:checked + .name {
-    background-color: #d1d1d1;
+    background-color: #80808036;
     font-weight: 600;
 }
 
@@ -154,6 +158,26 @@ div.nav {
     font-size: 1rem;
 }
 
+#console-controls {
+    display: flex;
+    justify-content: space-between; /* Aligns children to the start and end of the container */
+}
+
+.metric-control,
+.aggregation-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-options {
+    display: flex;
+    justify-content: flex-end; /* Aligns children to the end of the container */
+}
+
+.control-label {
+    margin-right: 1rem; /* Add some spacing between the label and options */
+}
+
 .interactive-text:hover {
     font-style: italic;
     cursor: pointer;
@@ -171,4 +195,23 @@ hr {
 #console-information {
     flex-grow: 1;
     overflow-y: auto;
+}
+
+.style-invert.dark,
+.text-invert.dark {
+    transition:
+        background-color 0.3s,
+        color 0.5s;
+}
+
+.style-invert.dark {
+    background-color: rgba(22, 22, 22, 0.212);
+    color: rgb(235, 235, 235);
+    border: 1.5px rgb(131, 130, 130) solid;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.596);
+    backdrop-filter: blur(20px) saturate(80%) contrast(70%) brightness(130%);
+}
+
+.text-invert.dark {
+    color: rgb(184, 184, 184) !important;
 }

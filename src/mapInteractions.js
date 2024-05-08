@@ -51,15 +51,37 @@ export function updateMapData(newGeoJSON) {
 }
 
 // Handle map style change
+// document.addEventListener("DOMContentLoaded", function () {
+//     const radios = document.querySelectorAll('.map-styles input[type="radio"]');
+
+//     radios.forEach((radio) => {
+//         radio.addEventListener("click", function () {
+//             if (this.checked) {
+//                 const mapStyle = this.value;
+//                 setMapStyle(mapStyle);
+//             }
+//         });
+//     });
+
+//     function setMapStyle(style) {
+//         map.setStyle("mapbox://styles/urbizton/" + style);
+//         console.log("Map style set to:", style);
+//     }
+// });
 document.addEventListener("DOMContentLoaded", function () {
     const radios = document.querySelectorAll('.map-styles input[type="radio"]');
+    const styleInvertElements = document.querySelectorAll(
+        ".style-invert, .text-invert",
+    );
 
     radios.forEach((radio) => {
         radio.addEventListener("click", function () {
-            if (this.checked) {
-                const mapStyle = this.value;
-                setMapStyle(mapStyle);
-            }
+            const mapStyle = this.value;
+            setMapStyle(mapStyle);
+            styleInvertElements.forEach((element) => {
+                const isDark = mapStyle === "clve9aeu900c501rd7qcn14q6";
+                element.classList.toggle("dark", isDark);
+            });
         });
     });
 
