@@ -4,6 +4,7 @@ window.onload = function () {
 
     let mapInfo =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proi ";
+    mapInfo += mapInfo + mapInfo;
     setConsoleText("map-information", mapInfo);
 };
 
@@ -25,9 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const selectedOption = selectedOptions[control.id];
 
             if (selectedOption !== undefined) {
-                selectedOption.style.fontWeight = "normal"; // Deselect previously selected option
+                selectedOption.style.fontWeight = "normal";
+                selectedOption.style.backgroundColor = "transparent"; // Reset background color
             }
-            target.style.fontWeight = "bold"; // Select the clicked option
+            target.style.fontWeight = "bold";
+            target.style.backgroundColor = "rgba(114, 208, 255, 0.17)"; // Set background color here
             selectedOptions[control.id] = target; // Update the selected option
 
             console.log(`Selected ${target.textContent}`);
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     controls.forEach(function (control) {
         const defaultOption = control.querySelector(".interactive-text");
         defaultOption.style.fontWeight = "bold";
+        defaultOption.style.backgroundColor = "rgba(114, 208, 255, 0.17)"
         selectedOptions[control.id] = defaultOption;
         control.addEventListener("click", toggleBoldnessAndAction);
     });
