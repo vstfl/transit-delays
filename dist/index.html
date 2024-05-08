@@ -11,6 +11,12 @@
             href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
             rel="stylesheet"
         />
+
+        <!-- Font -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Heebo:400,400i,700&display=swap"
+        />
     <script defer src="main.js"></script></head>
 
     <body>
@@ -37,11 +43,53 @@
                 </div>
             </div>
 
-            <section class="console-container" id="console">
-                <div id="console-title"></div>
-                <div id="console-controls"></div>
-                <div id="console-information"></div>
-                <div id="console-legend"></div>
+            <section class="console-container container-bg" id="console">
+                <div id="console-title">
+                    <h2 id="map-title">Placeholder text</h2>
+                    <p id="map-subtitle">
+                        In the City of Edmonton from March 4th to 8th
+                    </p>
+                </div>
+                <hr />
+                <div id="console-controls">
+                    <div
+                        class="metric-control interactive-form"
+                        id="metric-control"
+                    >
+                        Metric:
+                        <span id="metric1" class="interactive-text">Delay</span>
+                        or
+                        <span id="metric2" class="interactive-text"
+                            >People-Delay</span
+                        >
+                    </div>
+                    <div
+                        class="aggregation-control interactive-form"
+                        id="aggregation-control"
+                    >
+                        Aggregation:
+                        <span id="aggregation1" class="interactive-text"
+                            >Stop</span
+                        >
+                        or
+                        <span id="aggregation2" class="interactive-text"
+                            >Neighborhood</span
+                        >
+                    </div>
+                </div>
+                <hr />
+                <div id="console-information" class="flex-grow">
+                    <p id="map-information">
+                        In the City of Edmonton from March 4th to 8th
+                    </p>
+                </div>
+                <hr />
+                <div id="console-legend">
+                    <img
+                        src="./assets/legend.png"
+                        style="width: 100%; height: auto"
+                    />
+                </div>
             </section>
         </div>
 
