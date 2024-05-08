@@ -1,3 +1,6 @@
+
+const API_KEY = 'apikeygoeshere';
+
 window.onload = function () {
     let mapTitle = "Person-Minute Delays at Each Neighborhood"; // Dynamically changed later
     setIDText("map-title", mapTitle);
@@ -101,7 +104,7 @@ function createConsoleInformation() {
     iframe.setAttribute("height", "200");
     iframe.setAttribute("frameborder", "0");
     iframe.setAttribute("style", "border:0; border-radius: 1rem; padding: 1rem 0");
-    iframe.setAttribute("src", `https://www.google.com/maps/embed/v1/streetview?key=AIzaSyBejfCQlJmEkQPRMHffCLLp0YfyZN-Z6FQ&location=${pointData.latitude},${pointData.longitude}`);
+    iframe.setAttribute("src", `https://www.google.com/maps/embed/v1/streetview?key=${API_KEY}&location=${pointData.latitude},${pointData.longitude}`);
     
     consoleInformationDiv.appendChild(iframe);
 }
