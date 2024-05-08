@@ -199,7 +199,39 @@ hr {
     flex-grow: 1;
     overflow-y: auto;
     margin-right: 7px;
+    padding-top: 0 !important;
 }
+
+#console-information ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:center;
+    list-style-type: none;
+    padding: 0;
+    height: auto;
+    margin-bottom: 0.5rem;
+}
+
+#console-information li {
+    width: 200px;
+    white-space: nowrap;
+    margin: 0 0;
+    text-align: center;
+}
+
+
+#console-information .field-text {
+    font-weight: bold;
+    /* text-decoration: underline; */
+    letter-spacing: 0.15ch;
+
+}
+
+#console-information .value-text {
+    letter-spacing: 0.15ch;
+}
+
 
 /* !! CONSOLE SCROLL-BAR  */
 div::-webkit-scrollbar {
