@@ -5,6 +5,19 @@ body {
     font-family: "Heebo", sans-serif;
 }
 
+/* Legend formatting */
+:root {
+    /* Change the values as per your requirements */
+    --map-legend-maxwidth: 60%;
+    --map-legend-maxheight: 80vh;
+    --map-legend-margin: 1rem;
+    --map-legend-font: 1.2rem / 1.5 "Heebo", sans-serif;
+}
+
+html {
+    font-size: 90%;
+}
+
 .container-bg {
     background-color: #ffffff44;
     border: 1.5px rgb(158, 158, 158) solid;
@@ -20,7 +33,7 @@ body {
     justify-content: flex-end;
     position: relative;
     margin: 0.7rem;
-    height: 5vh;
+    height: 4vh;
     min-height: 2rem;
     z-index: 2;
 }
@@ -33,8 +46,8 @@ body {
     padding: 0px;
 }
 
-#header .right-side:hover {
-    filter: brightness(1.2); /* Increase brightness of the background */
+.container-bg:hover {
+    filter: contrast(110%); /* Increase brightness of the background */
 }
 
 #header .right-side .nav-text:hover {
@@ -123,7 +136,6 @@ div.nav {
     font-weight: bolder;
 }
 
-
 /* !! CONSOLE CONFIGURATION */
 .console-container {
     display: flex;
@@ -173,11 +185,11 @@ div.nav {
 
 .control-options {
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
 }
 
 .control-label {
-    margin-right: 1rem; 
+    margin-right: 1rem;
 }
 
 .interactive-text:hover {
@@ -192,7 +204,7 @@ div.nav {
 
 hr {
     width: 99.5%;
-    border-top: 1px #6788a8ab solid 
+    border-top: 1px #6788a8ab solid;
 }
 
 #console-information {
@@ -206,7 +218,7 @@ hr {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     list-style-type: none;
     padding: 0;
     height: auto;
@@ -214,28 +226,25 @@ hr {
 }
 
 #console-information li {
-    width: 200px;
+    width: 45%;
     white-space: nowrap;
     margin: 0 0;
     text-align: center;
 }
 
-
 #console-information .field-text {
     font-weight: bold;
     /* text-decoration: underline; */
     letter-spacing: 0.15ch;
-
 }
 
 #console-information .value-text {
     letter-spacing: 0.15ch;
 }
 
-
 /* !! CONSOLE SCROLL-BAR  */
 div::-webkit-scrollbar {
-    background-color:#ffffff2d;
+    background-color: #ffffff2d;
     border: 1px #81aad238 solid;
     border-radius: 1rem;
     backdrop-filter: blur(20px) saturate(80%) contrast(70%) brightness(130%);
@@ -249,12 +258,15 @@ div::-webkit-scrollbar-thumb {
 }
 
 div::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(164, 207, 231, 0.308); /* Change the color as desired */
+    background-color: rgba(
+        164,
+        207,
+        231,
+        0.308
+    ); /* Change the color as desired */
     border-radius: 10px;
     width: 75%;
 }
-
-
 
 .style-invert.dark,
 .text-invert.dark {
@@ -274,5 +286,3 @@ div::-webkit-scrollbar-thumb:hover {
 .text-invert.dark {
     color: rgb(184, 184, 184) !important;
 }
-
-
