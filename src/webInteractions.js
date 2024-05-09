@@ -1,6 +1,6 @@
 import { fetchGeoJSON, updateMapData } from "./mapInteractions.js";
 
-const API_KEY = "yes";
+const API_KEY = "AIzaSyBEd966zdxbzXh6NeaO5L20UB_x6XvvyDQ";
 
 window.onload = function () {
     let mapTitle = "Person-Minute Delays at Each Neighborhood"; // Dynamically changed later
@@ -12,7 +12,7 @@ window.onload = function () {
     // setIDText("map-information", mapInfo);
 };
 
-function setIDText(id, text) {
+export function setIDText(id, text) {
     const information = document.getElementById(id);
     information.textContent = text;
 }
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             selectedOptions[control.id] = defaultOption;
             control.addEventListener("click", function (event) {
                 toggleBoldnessAndAction(event, selectedOptions);
+
             });
         }
     });
@@ -71,8 +72,10 @@ function toggleBoldnessAndAction(event, selectedOptions) {
         const textContent = target.textContent.trim();
         if (textContent === "Delay" || textContent === "People-Delay") {
             currentMetric = textContent;
+            setIDText("map-title", `${textContent}s at Each ${currentAggregation}`)
         } else if (textContent === "Neighborhood" || textContent === "Stop") {
             currentAggregation = textContent;
+            setIDText("map-title", `${currentMetric}s at Each ${textContent}`)
         }
 
         console.log(`Selected ${target.textContent}`);
@@ -93,7 +96,7 @@ function toggleBoldnessAndAction(event, selectedOptions) {
 // !! Logic for dynamic information handling
 
 // Function to create and append list items to the console-information div
-export function createConsoleInformation(pointData) {
+export function createConsoleInformation(pointData, lat, lng) {
     const consoleInformationDiv = document.getElementById(
         "console-information",
     );
@@ -119,32 +122,36 @@ export function createConsoleInformation(pointData) {
 
         // Append spans to list item
         li.appendChild(fieldSpan);
+        li.appendChild(document.createElement("br")); // Add line break
         li.appendChild(valueSpan);
 
         ul.appendChild(li);
     }
 
-    const sampleText = document.createElement("p");
-    sampleText.textContent =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+    // const sampleText = document.createElement("p");
+    // sampleText.textContent =
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
 
     // Append the unordered list to the console-information div
     consoleInformationDiv.appendChild(ul);
-    consoleInformationDiv.appendChild(sampleText);
+    // consoleInformationDiv.appendChild(sampleText);
 
-    // Append Google Maps Street View iframe
-    // const iframe = document.createElement("iframe");
-    // iframe.setAttribute("width", "100%");
-    // iframe.setAttribute("height", "400");
-    // iframe.setAttribute("frameborder", "0");
-    // iframe.setAttribute(
-    //     "style",
-    //     "border: none; border-radius: 1rem; padding: 0",
-    // );
-    // iframe.setAttribute(
-    //     "src",
-    //     `https://www.google.com/maps/embed/v1/streetview?key=${API_KEY}&location=${pointData.latitude},${pointData.longitude}`,
-    // );
+    //Append Google Maps Street View iframe
+    if (lat && lng) {
+        const iframe = document.createElement("iframe");
+        iframe.setAttribute("width", "100%");
+        iframe.setAttribute("height", "400");
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute(
+            "style",
+            "border: none; border-radius: 1rem; padding: 0",
+        );
+        iframe.setAttribute(
+            "src",
+            `https://www.google.com/maps/embed/v1/streetview?key=${API_KEY}&location=${lng},${lat}`,
+        );
 
-    // consoleInformationDiv.appendChild(iframe);
+        consoleInformationDiv.appendChild(iframe);
+    }
+
 }

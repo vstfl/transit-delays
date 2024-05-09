@@ -4,6 +4,7 @@ import {
     currentMetric,
     currentAggregation,
     createConsoleInformation,
+    setIDText
 } from "./webInteractions.js";
 
 mapboxgl.accessToken =
@@ -135,63 +136,73 @@ function getPaint(currentMetric, currentAggregation) {
         if (currentMetric === "Delay") {
             return {
                 "circle-color": [
-                    "interpolate",
-                    ["linear"],
-                    ["get", "Delay"],
-                    0,
-                    "#2D7AB5",
-                    60,
-                    "#81B9D7",
-                    120,
-                    "#C6E6DB",
-                    180,
-                    "#FFFFC1",
-                    300,
-                    "#FECA81",
-                    600,
-                    "#F07C49",
-                    900,
-                    "#D41A18",
+                    "case",
+                    ["boolean", ["feature-state", "hover"], false],
+                    "purple",
+                    [
+                        "interpolate",
+                        ["linear"],
+                        ["get", "Delay"],
+                        0,
+                        "#2D7AB5",
+                        60,
+                        "#81B9D7",
+                        120,
+                        "#C6E6DB",
+                        180,
+                        "#FFFFC1",
+                        300,
+                        "#FECA81",
+                        600,
+                        "#F07C49",
+                        900,
+                        "#D41A18",
+                    ]
                 ],
                 "circle-radius": getCircleRadiusProperty(
                     currentGeoJSON,
                     "Delay",
-                    4,
-                    8,
+                    5,
+                    9,
                 ),
-                "circle-stroke-width": 0.5,
-                "circle-stroke-color": "darkgrey",
+                "circle-stroke-width": 0.7,
+                "circle-stroke-color": "#666666",
             };
         } else {
             // For people-delay
             return {
                 "circle-color": [
-                    "interpolate",
-                    ["linear"],
-                    ["get", "People-Delay-Mins"],
-                    0,
-                    "#2D7AB5",
-                    60,
-                    "#81B9D7",
-                    175,
-                    "#C6E6DB",
-                    325,
-                    "#FFFFC1",
-                    525,
-                    "#FECA81",
-                    800,
-                    "#F07C49",
-                    1150,
-                    "#D41A18",
+                    "case",
+                    ["boolean", ["feature-state", "hover"], false],
+                    "purple",
+                    [
+                        "interpolate",
+                        ["linear"],
+                        ["get", "People-Delay-Mins"],
+                        0,
+                        "#2D7AB5",
+                        60,
+                        "#81B9D7",
+                        175,
+                        "#C6E6DB",
+                        325,
+                        "#FFFFC1",
+                        525,
+                        "#FECA81",
+                        800,
+                        "#F07C49",
+                        1150,
+                        "#D41A18",
+                    ]
                 ], // Change color for other metrics
                 "circle-radius": getCircleRadiusProperty(
                     currentGeoJSON,
                     "People-Delay-Mins",
-                    4,
-                    8,
+                    5,
+                    9,
                 ), // Change radius for other metrics
-                "circle-stroke-width": 0.5,
-                "circle-stroke-color": "darkgrey",
+                "circle-stroke-width": 0.7,
+                "circle-stroke-color": "#666666",
             };
         }
     } else if (currentAggregation === "Neighborhood") {
@@ -199,6 +210,8 @@ function getPaint(currentMetric, currentAggregation) {
             return {
                 "fill-color": [
                     "case",
+                    ["boolean", ["feature-state", "hover"], false],
+                    "purple",
                     ["==", ["get", "delay"], null],
                     "rgba(255, 255, 255, 0.4)", // Default color for null values
                     [
@@ -222,13 +235,15 @@ function getPaint(currentMetric, currentAggregation) {
                     ],
                 ],
                 "fill-opacity": 0.8,
-                "fill-outline-color": "#FFFFFF",
+                "fill-outline-color": "#666666",
             };
         } else {
             // for People-Delay
             return {
                 "fill-color": [
                     "case",
+                    ["boolean", ["feature-state", "hover"], false],
+                    "purple",
                     ["==", ["get", "people-delay"], null],
                     "rgba(255, 255, 255, 0.4)", // Default color for null values
                     [
@@ -252,7 +267,7 @@ function getPaint(currentMetric, currentAggregation) {
                     ],
                 ],
                 "fill-opacity": 0.8,
-                "fill-outline-color": "#FFFFFF",
+                "fill-outline-color": "#666666",
             };
         }
     }
@@ -271,13 +286,19 @@ function getCircleRadiusProperty(geojson, propertyName, minSize, maxSize) {
 
     // Define and return the circle-radius property
     return [
-        "interpolate",
-        ["linear"],
-        ["get", propertyName],
-        minPropertyValue,
-        minSize,
-        maxPropertyValue,
-        maxSize,
+        "case",
+        ["boolean", ["feature-state", "hover"], false],
+        10, // Color when feature state hover is true
+        // Default color when feature state hover is false
+        [
+            "interpolate",
+            ["linear"],
+            ["get", propertyName],
+            minPropertyValue,
+            minSize,
+            maxPropertyValue,
+            maxSize,
+        ]
     ];
 }
 
@@ -321,9 +342,155 @@ document
         panToEdmonton();
     });
 
-createConsoleInformation({
-    stop: "B",
-    delay: "180",
-    latitude: 40.7128, // Example latitude
-    longitude: -74.006, // Example longitude
+function createEmpty() {
+    createConsoleInformation({
+    })
+};
+
+function createInformation(feature, lat, lng) {
+    let prop = feature.properties
+
+    if (currentAggregation == 'Neighborhood') {
+        if (currentMetric == 'Delay') {
+            // setIDText("map-title", "Delays at Each Neighborhood");
+            createConsoleInformation({
+                Neighborhood: prop["Friendly Name"],
+                'Bus Stops': prop.bus_stops,
+                'Delay': prop.delay,
+                'Delay CV': prop.delay_cv,
+                'Trips': prop.trips,
+                'Trips CV': prop.trips_cv
+            }, lat, lng);
+        } else {
+            // setIDText("map-title", "Person-Minute Delays at Each Neighborhood");
+            createConsoleInformation({
+                Neighborhood: prop["Friendly Name"],
+                'Bus Stops': prop.bus_stops,
+                'People-Delay': prop['people-delay'],
+                'People-Delay CV': prop['people-delay_cv'],
+                'Trips': prop.trips,
+                'Trips CV': prop.trips_cv,
+            }, lat, lng);
+        };
+
+    } else {
+        if (currentMetric == 'Delay') {
+            // setIDText("map-title", "Person-Minute Delays at Each Bus Stop");
+            createConsoleInformation({
+                'Stop ID': prop.Stop_id,
+                Neighborhood: prop["Friendly Name"],
+                'Delay' : prop.Delay,
+                'Trips' : prop.Trips,
+                'Transit Users' : prop["Transit Users"],
+                Latitude: prop.lat, // Example latitude
+                Longitude: prop.lon, // Example longitude
+            }, lat, lng);
+        } else {
+            // setIDText("map-title", "Delays at Each Bus Stop");
+            createConsoleInformation({
+                'Stop ID': prop.Stop_id,
+                Neighborhood: prop["Friendly Name"],
+                'People-Delay-Mins' : prop['People-Delay'],
+                'Trips' : prop.Trips,
+                'Transit Users' : prop["Transit Users"],
+                Latitude: prop.lat, // Example latitude
+                Longitude: prop.lon, // Example longitude
+            }, lat, lng);
+        }
+    }
+};
+
+
+
+
+let uniqueID = null;
+let clickedPoint = false;
+let clickedPointData;
+let clickedPointLat;
+let clickedPointLng;
+// General point interactivity
+map.on('mouseleave', 'latestLayer', () => {
+    map.getCanvas().style.cursor = 'default';
+
+    if (uniqueID) {
+        map.setFeatureState(
+            { source: 'latestSource', id: uniqueID },
+            { hover: false }
+        );
+        uniqueID = null; // Reset uniqueID
+    }
+
+    if (!clickedPoint) {
+        createEmpty(); // Reset UI
+    } else {
+        createInformation(clickedPointData, clickedPointLng, clickedPointLat);
+        map.setFeatureState(
+            { source: 'latestSource', id: clickedPointData.id },
+            { hover: true }
+        );
+    }
+});
+
+map.on('click', 'latestLayer', (event) => {
+    const feature = event.features[0];
+
+    if (clickedPoint) {
+        map.setFeatureState(
+            { source: 'latestSource', id: clickedPointData.id },//modify uniqueId
+            { hover: false }
+        );
+    }
+
+    console.log(event)
+    console.log(event.lngLat.lat)
+    map.easeTo({
+        padding: {left: 200},
+        center: [event.lngLat.lng, event.lngLat.lat],
+        zoom: 12,
+        duration: 1000
+    })
+
+
+    clickedPoint = true;
+    uniqueID = feature.id;
+    clickedPointData = feature;
+    clickedPointLng = event.lngLat.lng
+    clickedPointLat = event.lngLat.lat
+    console.log(feature)
+    createInformation(feature, clickedPointLng, clickedPointLat);
+});
+
+// Remove this function if not working properly
+map.on('mousemove', 'latestLayer', (event) => {
+    map.getCanvas().style.cursor = 'pointer';
+
+    const features = map.queryRenderedFeatures(event.point, { layers: ['latestLayer'] });
+    // Check if any features are hovered
+    if (features.length > 0) {
+        const hoveredFeature = features[0];
+        const hoveredFeatureId = hoveredFeature.id;
+
+        // If the hovered feature is different from the currently hovered feature
+        if (hoveredFeatureId !== uniqueID) {
+            // Clear feature state for the previously hovered feature
+            if (uniqueID) {
+                map.setFeatureState(
+                    { source: 'latestSource', id: uniqueID },
+                    { hover: false }
+                );
+            }
+
+            // Update feature state for the newly hovered feature
+            map.setFeatureState(
+                { source: 'latestSource', id: hoveredFeatureId },
+                { hover: true }
+            );
+
+            // Update uniqueID to the newly hovered feature's id
+            uniqueID = hoveredFeatureId;
+
+            // Update UI with the hovered feature's information
+            createInformation(hoveredFeature);
+        }
+    }
 });

@@ -212,24 +212,29 @@ hr {
     overflow-y: auto;
     margin-right: 7px;
     padding-top: 0 !important;
+    font-size: 1.5rem;
 }
 
 #console-information ul {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     list-style-type: none;
     padding: 0;
     height: auto;
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 #console-information li {
-    width: 45%;
+    width: auto;
     white-space: nowrap;
+    flex-wrap: wrap;
     margin: 0 0;
-    text-align: center;
+    text-align: left;
 }
 
 #console-information .field-text {
